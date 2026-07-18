@@ -1,10 +1,12 @@
 # Customer-Segmentation-Analysis-using-RFM-SQL-PowerBI
 
-1. Business Context
+### 1. Business Context
+   
 The objective of this project was to optimize marketing spend and maximize Campaign ROI for "Sales Everything". Facing budget constraints, the Marketing Director required a data-driven strategy to move away from mass marketing and focus efforts on customer segments with the highest conversion potential and lifetime value (LTV).
 By implementing the RFM (Recency, Frequency, Monetary) framework, this analysis identifies high-value customer groups, flags segments at risk of churning, and provides actionable insights to drive personalized, cost-effective marketing strategies.
 
-2. Tech Stack & Project Structure
+### 2. Tech Stack & Project Structure
+   
 Database / Data Transformation: MySQL (Window Functions, CTEs)
 Data Visualization: Power BI (In progress)
 
@@ -13,7 +15,8 @@ data/regional_sales_data.csv – Raw, historical sales dataset.
 scripts/customers_segmentation.sql – Production-ready SQL script containing data aggregation, scoring (NTILE), and customer segmentation logic.
 dashboards/customers_segmentation.pbix – Interactive Power BI dashboard visualizing segment distribution and KPIs.
 
-3. Step-by-Step Methodology
+### 3. Step-by-Step Methodology
+   
 Data Understanding & Revenue Formula Calibration:
 Before writing the query, I analyzed the schema to properly calculate net revenue. Since Discount Applied was stored as a percentage/decimal, I formulated the logic to calculate the actual price paid per line item:
 Order Quantity * Unit Price * (1 - Discount Applied).
@@ -33,7 +36,8 @@ To ensure clean, readable, and maintainable code, I structured the script using 
 Business Segmentation Logic:
 I applied a comprehensive CASE WHEN statement to translate numerical RFM combinations into meaningful business personas (e.g., Champions, At Risk, Hibernating), prioritizing high-risk/high-reward segments first to avoid logical overlaps.
 
-3. Business Insights & Actionable Recommendations
+### 4. Business Insights & Actionable Recommendations
+   
 🚨 "At Risk" Segment (High History, Low Recency)
 Insight: These are historically loyal, high-spending customers who haven't made a purchase recently. They represent a critical risk of customer churn, but possess high reactivation value.
 Recommendation: Implement a targeted Win-Back Campaign. Send personalized emails with limited-time, high-incentive discount codes (e.g., "We miss you! Here is 20% off your next order"). Focus marketing communication on new arrivals that match their past purchase categories to trigger re-engagement.
