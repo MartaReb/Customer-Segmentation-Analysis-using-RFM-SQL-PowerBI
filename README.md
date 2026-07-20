@@ -1,64 +1,66 @@
-# Customer-Segmentation-Analysis-using-RFM-SQL-PowerBI
+# 📊 Customer Segmentation Analysis using RFM & SQL
 
-### 1. Business Context
-   
-The objective of this project was to optimize marketing spend and maximize Campaign ROI for "Sales Everything". Facing budget constraints, the Marketing Director required a data-driven strategy to move away from mass marketing and focus efforts on customer segments with the highest conversion potential and lifetime value (LTV).
+---
 
-By implementing the RFM (Recency, Frequency, Monetary) framework, this analysis identifies high-value customer groups, flags segments at risk of churning, and provides actionable insights to drive personalized, cost-effective marketing strategies.
+## 📌 1. Business Context
 
-### 2. Tech Stack & Project Structure
-   
-Database / Data Transformation: MySQL (Window Functions, CTEs)
+The objective of this project was to optimize marketing spend and maximize Campaign ROI for **OmniWholesale Co.** Facing strict budget constraints, the Marketing Director required a data-driven strategy to move away from mass marketing and focus efforts on customer segments with the highest conversion potential and lifetime value (LTV).
 
-Data Visualization: Power BI (In progress)
+By implementing the **RFM (Recency, Frequency, Monetary)** framework, this analysis:
+* Identifies high-value customer groups.
+* Flags high-value accounts at risk of churning.
+* Provides actionable insights to drive personalized, cost-effective marketing strategies.
 
-Repository Structure:
+---
 
-data/regional_sales_data.csv – Raw, historical sales dataset.
+## 🛠️ 2. Tech Stack & Repository Structure
 
-scripts/customers_segmentation.sql – Production-ready SQL script containing data aggregation, scoring (NTILE), and customer segmentation logic.
+* **Database / Data Transformation:** `MySQL` (Advanced Window Functions, CTEs)
+* **Data Visualization:** `Power BI` *(In Progress)*
 
-dashboards/customers_segmentation.pbix – Interactive Power BI dashboard visualizing segment distribution and KPIs.
+```text
+├── data/
+│   └── regional_sales_data.csv        # Raw, historical sales dataset
+├── scripts/
+│   └── customers_segmentation.sql     # Production-ready SQL script (Aggregation, Scoring, Segmentation)
+└── dashboards/
+    └── customers_segmentation.pbix    # Interactive Power BI dashboard
 
-### 3. Step-by-Step Methodology
-   
-Data Understanding & Revenue Formula Calibration:
+---
 
-Before writing the query, I analyzed the schema to properly calculate net revenue. Since Discount Applied was stored as a percentage/decimal, I formulated the logic to calculate the actual price paid per line item:
-Order Quantity * Unit Price * (1 - Discount Applied).
+## 🧠 3. Step-by-Step Methodology
 
-RFM Metrics Extraction (SQL Agregation):
+* **Data Understanding & Revenue Calibration**  
+  * Analyzed schema to calculate net revenue accurately.  
+  * Formulated line-item revenue logic considering decimal discounts:  
+    `Order Quantity * Unit Price * (1 - Discount Applied)`
 
-I aggregated the raw transactional data by CustomerID using SQL group functions:
+* **RFM Metrics Extraction (SQL Aggregation)**  
+  * **Recency:** `DATEDIFF('2020-12-31', MAX(OrderDate))`  
+  * **Frequency:** `COUNT(DISTINCT OrderNumber)`  
+  * **Monetary:** `SUM(Net Revenue)`
 
-Recency: Calculated using DATEDIFF between the snapshot date ('2020-12-31') and the maximum order date (MAX(OrderDate)) per customer.
+* **Customer Scoring (`NTILE`)**  
+  * Applied `NTILE(5)` window functions to partition customers into 5 equal tiers per metric.  
+  * Calibrated sorting directions (`ASC` vs `DESC`) so top performers consistently receive a **5** score.
 
-Frequency: Captured via COUNT(DISTINCT OrderNumber) to count unique buying events.
+* **Modular Architecture (CTEs)**  
+  * Structured the logic using multiple Common Table Expressions for readability and maintainability.  
+  * Concatenated scores into a single `rfm_score` string.
 
-Monetary: Computed using the calibrated revenue formula inside a SUM() function.
+* **Business Segmentation Logic**  
+  * Built a prioritized `CASE WHEN` block to categorize clients into actionable business personas (*Champions*, *At Risk*, *Loyal Customers*, *Hibernating*).
 
-Customer Scoring via Window Functions (NTILE):
+---
 
-To divide the customer base into 5 equal tiers for each metric, I implemented the NTILE(5) window function. I carefully calibrated the sorting logic (ASC vs DESC) to ensure that the best performing customers (lowest recency, highest frequency, highest monetary) consistently received a score of 5, while the lowest received a 1.
+## 💡 4. Business Insights & Recommendations
 
-Modular Code Architecture (CTEs):
+> ### 🚨 "At Risk" Segment (High History | Low Recency)
+> * **Insight:** Historically loyal, high-spending accounts that haven't purchased recently. They represent high revenue potential but face immediate churn risk.  
+> * **Action Plan:** Launch a targeted **Win-Back Campaign**. Send automated emails with time-sensitive, highly attractive offers (e.g., *"We miss you! Take 20% off your next order"*).
 
-To ensure clean, readable, and maintainable code, I structured the script using multiple Common Table Expressions (CTEs). This allowed me to bypass SQL's execution order limitations and cleanly concatenate the scores into a single rfm_score string.
+<br>
 
-Business Segmentation Logic:
-
-I applied a comprehensive CASE WHEN statement to translate numerical RFM combinations into meaningful business personas (e.g., Champions, At Risk, Hibernating), prioritizing high-risk/high-reward segments first to avoid logical overlaps.
-
-### 4. Business Insights & Actionable Recommendations
-   
-🚨 "At Risk" Segment (High History, Low Recency)
-
-Insight: These are historically loyal, high-spending customers who haven't made a purchase recently. They represent a critical risk of customer churn, but possess high reactivation value.
-
-Recommendation: Implement a targeted Win-Back Campaign. Send personalized emails with limited-time, high-incentive discount codes (e.g., "We miss you! Here is 20% off your next order"). Focus marketing communication on new arrivals that match their past purchase categories to trigger re-engagement.
-
-🏆 "Champions" Segment (High Recency, High Frequency, High Monetary)
-
-Insight: The company's most valuable asset. These customers buy frequently, recently, and spend the most. They do not need margin-eroding discounts to buy, as their brand loyalty is already high.
-
-Recommendation: Enroll them into an exclusive VIP Loyalty Program. Instead of discounts, offer non-monetary value: early access to new product launches, dedicated premium customer support, or rewards based on points. Leverage this segment for referral marketing and brand advocacy.
+> ### 🏆 "Champions" Segment (High Recency | High Frequency | High Monetary)
+> * **Insight:** The company's core revenue drivers. They buy frequently, recently, and spend the most. Brand loyalty is high, making margin-reducing discounts unnecessary.  
+> * **Action Plan:** Enroll them into an exclusive **VIP Loyalty Program**. Provide non-monetary perks: early access to product launches, dedicated account management, and exclusive events.
