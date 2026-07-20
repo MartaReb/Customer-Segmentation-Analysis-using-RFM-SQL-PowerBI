@@ -4,7 +4,7 @@
 
 ## 📌 1. Business Context
 
-The objective of this project was to optimize marketing spend and maximize Campaign ROI for **OmniWholesale Co.** Facing strict budget constraints, the Marketing Director required a data-driven strategy to move away from mass marketing and focus efforts on customer segments with the highest conversion potential and lifetime value (LTV).
+The objective of this project was to optimize marketing spend and maximize Campaign ROI for OmniWholesale Co. Facing strict budget constraints, the Marketing Director required a data-driven strategy to move away from mass marketing and focus efforts on customer segments with the highest conversion potential and lifetime value (LTV).
 
 By implementing the **RFM (Recency, Frequency, Monetary)** framework, this analysis:
 * Identifies high-value customer groups.
@@ -25,6 +25,7 @@ By implementing the **RFM (Recency, Frequency, Monetary)** framework, this analy
 │   └── customers_segmentation.sql     # Production-ready SQL script (Aggregation, Scoring, Segmentation)
 └── dashboards/
     └── customers_segmentation.pbix    # Interactive Power BI dashboard
+```
 
 ---
 
