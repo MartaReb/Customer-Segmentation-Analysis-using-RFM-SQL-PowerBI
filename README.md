@@ -65,3 +65,6 @@ By implementing the **RFM (Recency, Frequency, Monetary)** framework, this analy
 > ### 🏆 "Champions" Segment (High Recency | High Frequency | High Monetary)
 > * **Insight:** The company's core revenue drivers. They buy frequently, recently, and spend the most. Brand loyalty is high, making margin-reducing discounts unnecessary.  
 > * **Action Plan:** Enroll them into an exclusive **VIP Loyalty Program**. Provide non-monetary perks: early access to product launches, dedicated account management, and exclusive events.
+
+
+![Dashboard Preview](./dashboards/dashboard_preview.png)
