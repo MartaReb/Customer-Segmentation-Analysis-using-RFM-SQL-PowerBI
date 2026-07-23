@@ -16,7 +16,7 @@ By implementing the **RFM (Recency, Frequency, Monetary)** framework, this analy
 ## 🛠️ 2. Tech Stack & Repository Structure
 
 * **Database / Data Transformation:** `MySQL` (Advanced Window Functions, CTEs)
-* **Data Visualization:** `Power BI` *(In Progress)*
+* **Data Visualization:** `Power BI` 
 
 ```text
 ├── data/
@@ -24,7 +24,7 @@ By implementing the **RFM (Recency, Frequency, Monetary)** framework, this analy
 ├── scripts/
 │   └── customers_segmentation.sql     # Production-ready SQL script (Aggregation, Scoring, Segmentation)
 └── dashboards/
-    └── customers_segmentation.pbix    # Interactive Power BI dashboard
+    └── customer_segmentation.pbix     # Interactive Power BI dashboard
 ```
 
 ---
